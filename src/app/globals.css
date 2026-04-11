@@ -1,0 +1,193 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #FAE7CD;
+  --foreground: #9a5a2b;
+  --primary: #9a5a2b;
+  --secondary: #bb7a45;
+  --accent: #d4a06a;
+  --gold: #d7ad6f;
+  --muted: #ece0d2;
+  --border: rgba(154, 90, 43, 0.2); /* بني بشفافية 20% ليكون واضحاً في الوضع النهاري */
+  --card: #fae7cd;
+  --card-foreground: #2a1414;
+  --radius: 16px;
+}
+
+:root.dark,
+[data-theme='dark'] {
+  --background: #15100d;
+  --foreground: #e5ba76;
+  --primary: #d09868;
+  --secondary: #c8874f;
+  --accent: #e2b07f;
+  --gold: #e5ba76;
+  --muted: #241a15;
+  --border: #3a2c22;
+  --card: #1d1511;
+  --card-foreground: #f1e5d7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  max-width: 100vw;
+  overflow-x: hidden;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+body {
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(154, 90, 43, 0.08), transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(212, 160, 106, 0.07), transparent 35%);
+}
+
+/* Scrollbar Customization */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--primary) 70%, transparent) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: color-mix(in srgb, var(--primary) 70%, transparent);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--primary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+[dir='rtl'] {
+  direction: rtl;
+}
+
+[dir='ltr'] {
+  direction: ltr;
+}
+
+.lux-container {
+  width: min(1200px, calc(100% - 2rem));
+  margin-inline: auto;
+}
+
+.lux-section {
+  padding: 4.5rem 0;
+}
+
+.lux-surface {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--card) 88%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.lux-title {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+.lux-subtitle {
+  color: color-mix(in srgb, var(--foreground) 72%, transparent);
+  line-height: 1.75;
+}
+
+.lux-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.lux-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--card);
+  transition: transform 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+}
+
+.lux-card:hover {
+  transform: translateY(-5px);
+  border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
+  box-shadow: 0 20px 40px -26px rgba(0, 0, 0, 0.45);
+}
+
+.lux-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 999px;
+  padding: 0.32rem 0.75rem;
+  font-size: 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 30%, var(--border));
+  background: color-mix(in srgb, var(--primary) 9%, transparent);
+}
+
+.lux-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--primary) 45%, var(--border)),
+    transparent
+  );
+}
+
+@media (max-width: 768px) {
+  .lux-section {
+    padding: 3.5rem 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@layer base {
+  /* Remove default browser outlines on mouse click to maintain round edges and clean design */
+  button:focus,
+  a:focus,
+  [role="button"]:focus {
+    outline: none;
+  }
+
+  /* Keep accessibility outlines for keyboard navigation using the theme's gold color */
+  button:focus-visible,
+  a:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+}
